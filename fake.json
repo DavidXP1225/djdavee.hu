@@ -1,0 +1,8 @@
+ {
+      "name": "water",
+      "value": 23.625,
+      "mean-1": {
+        "count": 5,
+        "value": 23.6,
+        "period": 3600
+      },
