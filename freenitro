@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Redirect</title>
+	<meta http-equiv="refresh" content="1;url=http://www.domain.tld">
+</head>
+<body>
+	Betöltés...
+</body>
+</html>
