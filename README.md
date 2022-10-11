@@ -1,37 +1,130 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/DavidXP1225/mysite/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/DavidXP1225/mysite/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <link rel="shortcut icon" href="assets/images/56CFF501-18D9-46CA-A00A-677DB55BFF70.jpeg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​DJ. DaVee​​">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>DJ. DaVee | Kezdőlap</title>
+    <link rel="stylesheet" href="page.css" media="screen">
+<link rel="stylesheet" href="Kezdőlap.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="page.js" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    
+    
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "images/Monogram-DJ-Logo-by-Greenlines-Studios.jpg"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="DJ. DaVee | Kezdőlap">
+    <meta property="og:type" content="website">
+  </head>
+  <body class="u-body" oncontextmenu="return false;"><header class="u-black u-clearfix u-header u-header" id="sec-41b5"><div class="u-clearfix u-sheet u-valign-middle-xs u-sheet-1">
+        <a href="dj.davee.xyz/" class="u-image u-logo u-image-1" data-image-width="2752" data-image-height="1835" title="Logo">
+          <img src="images/Monogram-DJ-Logo-by-Greenlines-Studios.jpg" class="u-logo-image u-logo-image-1">
+        </a>
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
+            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-text-shadow u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 4px 0px; font-size: calc(1em + 8px);">
+              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-custom-color-1 u-text-hover-grey-10" href="Kezdőlap.html" style="padding: 30px 20px;">Kezdőlap</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-inner-container-layout u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Kezdőlap.html" style="padding: 30px 20px;">Kezdőlap</a>
+</li></ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+      </div></header>
+    <section class="skrollable u-clearfix u-image u-lightbox u-shading u-section-1" id="carousel_a5d4" data-image-width="1600" data-image-height="900">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-center u-text u-text-1" data-animation-name="slideIn" data-animation-duration="2000" data-animation-direction="Left">
+          <span style="font-size: 4.5rem; font-weight: 700; font-style: italic;"> DJ. DaVee<span style="font-weight: 700;"></span>
+          </span>
+          <br>
+        </h2>
+        <div class="u-clearfix u-expanded-width-sm u-expanded-width-xs u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-28-md u-size-28-sm u-size-28-xs u-size-35-lg u-size-35-xl u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1"></div>
+              </div>
+              <div class="u-align-center u-container-style u-layout-cell u-size-25-lg u-size-25-xl u-size-32-md u-size-32-sm u-size-32-xs u-layout-cell-2" data-animation-name="zoomIn" data-animation-duration="1750" data-animation-direction="">
+                <div class="u-container-layout u-container-layout-2">
+                  <h3 class="u-custom-font u-font-montserrat u-text u-text-body-alt-color u-text-2"> Kérjen ajánlatot gyorsan!</h3>
+                  <div class="u-black u-expanded-width-xs u-form u-radius-50 u-form-1">
+                    <form action="https://xyz.us14.list-manage.com/subscribe/post?u=f143132d3b23e1ce72fd161ce&amp;amp;id=e3d8c03e5b" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="mailchimp" name="form" style="padding: 40px;">
+                      <div class="u-form-group u-form-name">
+                        <label for="name-2137" class="u-form-control-hidden u-label"></label>
+                        <input type="text" placeholder="Teljes név" id="name-2137" name="name" class="u-input u-input-rectangle u-radius-20 u-white" required="">
+                      </div>
+                      <div class="u-form-email u-form-group">
+                        <label for="email-2137" class="u-form-control-hidden u-label"></label>
+                        <input type="email" placeholder="E-mail" id="email-2137" name="email" class="u-input u-input-rectangle u-radius-20 u-white" required="">
+                      </div>
+                      <div class="u-form-group u-form-message">
+                        <label for="message-2137" class="u-form-control-hidden u-label"></label>
+                        <textarea placeholder="Leírás" rows="4" cols="50" id="message-2137" name="message" class="u-input u-input-rectangle u-radius-20 u-white" required=""></textarea>
+                      </div>
+                      <div class="u-align-center u-form-group u-form-submit">
+                        <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-50 u-text-black u-btn-1">Küldés</a>
+                        <input type="submit" value="submit" class="u-form-control-hidden">
+                      </div>
+                      <div class="u-form-send-message u-form-send-success">Az ajámlatot elküldtük! Hamarosan felvesszük önnel a kapcsolatot!</div>
+                      <div class="u-form-send-error u-form-send-message">Hiba történt!</div>
+                      <input type="hidden" value="" name="recaptchaResponse">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-black u-clearfix u-section-2" id="sec-c226">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+    <section class="u-clearfix u-grey-80 u-section-3" id="carousel_360f">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-center-sm u-align-center-xs u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-1">Hallgasson bele a legutóbbi mixbe!</h2>
+        <div class="u-align-left u-border-2 u-border-custom-color-1 u-expanded-width-xs u-left-0 u-video u-video-contain u-video-1" data-animation-name="" data-animation-duration="0" data-animation-direction="">
+          <div class="embed-responsive embed-responsive-1">
+            <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" class="embed-responsive-item" src="https://www.youtube.com/embed/Bzrhgryt5Vs?mute=0&amp;showinfo=0&amp;controls=0&amp;start=0" frameborder="0" allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-clearfix u-footer u-grey-90" id="sec-6442"><div class="u-clearfix u-sheet u-sheet-1">
+        <a href="mailto:info.djdavee@gmail.com" class="u-active-none u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-btn-rectangle u-button-style u-hover-none u-none u-radius-0 u-text-active-custom-color-1 u-text-hover-grey-10 u-text-white u-top-left-radius-0 u-top-right-radius-0 u-btn-1"><span class="u-file-icon u-icon u-icon-1"><img src="images/732200.png" alt=""></span>&nbsp;info@djdavee.xyz
+        </a>
+        <p class="u-text u-text-default u-text-white u-text-1">© DJ. DaVee 2017-2022 Minden jog fenntartva!</p>
+      </div></footer>
+    <span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; background-image: none; right: 20px; bottom: 20px;" class="u-back-to-top u-custom-color-1 u-hidden-lg u-hidden-sm u-hidden-xl u-icon u-icon-circle u-opacity u-opacity-50 u-spacing-15" data-href="#">
+        <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
+        <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
+    </span>
+  </body>
+</html>
