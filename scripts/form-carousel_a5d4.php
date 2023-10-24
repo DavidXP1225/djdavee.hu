@@ -4,12 +4,12 @@ require_once('FormProcessor.php');
 
 $form = array(
     'subject' => 'Igénylés',
-    'email_message' => '',
-    'success_redirect' => '',
+    'email_message' => 'Új üzenet',
+    'success_redirect' => 'Átirányítva!',
     'sendIpAddress' => true,
     'email' => array(
-    'from' => '',
-    'to' => 'davedkader@gmail.com'
+    'from' => 'no.reply@djdavee.hu',
+    'to' => 'info@djdavee.hu'
     ),
     'fields' => array(
     'name' => array(
