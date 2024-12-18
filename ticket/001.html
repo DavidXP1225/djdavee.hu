@@ -66,7 +66,13 @@
             border: none;
             border-radius: 4px;
         }
+        .coupon {
+            color: yellow; /* Sárga szín */
+            font-weight: bold; /* Félkövér */
+            font-size: 1.3em; /* Néhány pixellel nagyobb betűméret */
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
     <h1>A jegy érvényes!</h1>
@@ -75,6 +81,7 @@
     <p></p>
     <p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik, ami miatt nem másolható!</p>
     <p>Azonosító: <span id="azonosito"></span></p>
+    <div id="qrcode" style="margin-top: 20px;"></div> <!-- QR kód ide kerül -->
     <div class="checkmark" id="checkmark">✔</div>
     <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
     <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
@@ -100,6 +107,11 @@
 
         // Azonosító megjelenítése
         document.getElementById("azonosito").textContent = azonosito;
+
+        // QR kód generálása az azonosítóból
+        QRCode.toCanvas(document.getElementById("qrcode"), azonosito, function (error) {
+            if (error) console.error(error);
+        });
 
         // Elemszelekciók
         const checkmark = document.getElementById("checkmark");
