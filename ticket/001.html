@@ -96,8 +96,8 @@
         const storedVerified = localStorage.getItem("jegyVerified");
         let allAzonositos = JSON.parse(localStorage.getItem("allAzonositos")) || [];
 
-        // Frissítsük a tárolt azonosítók listáját egyedivé téve azt
-        if (!allAzonositos.some(item => item.id == azonosito)) {
+        // Az új azonosító elmentése, ha generáltunk és nem duplikálódik
+        if (!allAzonositos.some(item => item.id === azonosito)) {
             allAzonositos.push({ id: azonosito, verified: false });
             localStorage.setItem("allAzonositos", JSON.stringify(allAzonositos));
         }
@@ -139,7 +139,7 @@
 
                 // Az azonosító hitelesítettként jelölése
                 allAzonositos = allAzonositos.map(item =>
-                    item.id == azonosito ? { ...item, verified: true } : item
+                    item.id === azonosito ? { ...item, verified: true } : item
                 );
                 localStorage.setItem("allAzonositos", JSON.stringify(allAzonositos));
             }
