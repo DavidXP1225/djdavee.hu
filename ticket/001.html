@@ -1,6 +1,22 @@
-<h1>A jegy érvényes!</h1>
-<p>5.000 Ft fizetve!</p>
-<p>Érvényes: 2024. 12. 31. Thomas burger</p>
-<p></p>
-<p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik ami miatt nem másolható!</p>
-<p>Azonosító: < ? php echo $_SERVER['REMOTE_ADDR'] ? ></p>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jegy Érvényes</title>
+</head>
+<body>
+    <h1>A jegy érvényes!</h1>
+    <p>5.000 Ft fizetve!</p>
+    <p>Érvényes: 2024. 12. 31. Thomas burger</p>
+    <p></p>
+    <p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik, ami miatt nem másolható!</p>
+    <p>Azonosító: <span id="azonosito"></span></p>
+
+    <script>
+        // Generál egy 7 jegyű véletlenszámot
+        const randomAzonosito = Math.floor(1000000 + Math.random() * 9000000);
+        document.getElementById("azonosito").textContent = randomAzonosito;
+    </script>
+</body>
+</html>
