@@ -12,20 +12,6 @@
             text-align: center; /* Szöveg középre igazítása */
             padding: 20px;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 1.2em;
-            margin: 10px 0;
-        }
-        .checkmark {
-            font-size: 3em;
-            color: white;
-            margin-top: 20px;
-            cursor: pointer; /* Mutatja, hogy kattintható */
-        }
         .gear {
             position: absolute;
             top: 10px;
@@ -70,14 +56,7 @@
 </head>
 <body>
     <h1>A jegy érvényes!</h1>
-    <p>5.000 Ft fizetve!</p>
-    <p>Érvényes: 2024. 12. 31. Thomas burger</p>
-    <p></p>
-    <p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik, ami miatt nem másolható!</p>
     <p>Azonosító: <span id="azonosito"></span></p>
-    <div class="checkmark" id="checkmark">✔</div>
-    <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
-    <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
     <div class="gear" id="gear">⚙</div>
     <div class="modal" id="modal">
         <h2>Összes azonosító</h2>
@@ -86,71 +65,37 @@
     </div>
 
     <script>
-        // Elemek kiválasztása
-        const azonositoElem = document.getElementById("azonosito");
-        const checkmark = document.getElementById("checkmark");
-        const verifiedText = document.getElementById("verifiedText");
-        const couponCode = document.getElementById("couponCode");
+        // Tárolt adatok inicializálása
+        const storedAzonosito = localStorage.getItem("jegyAzonosito");
+        let azonosito = storedAzonosito || Math.floor(1000000 + Math.random() * 9000000);
+        const storedVerified = localStorage.getItem("jegyVerified");
+        let allAzonositos = JSON.parse(localStorage.getItem("allAzonositos")) || [];
+
+        // Frissítsük a tárolt azonosítók listáját egyedivé téve azt
+        if (!allAzonositos.some(item => item.id == azonosito)) {
+            allAzonositos.push({ id: azonosito, verified: false });
+            localStorage.setItem("allAzonositos", JSON.stringify(allAzonositos));
+        }
+
+        // Azonosító megjelenítése
+        document.getElementById("azonosito").textContent = azonosito;
+
+        // Elemek
         const gear = document.getElementById("gear");
         const modal = document.getElementById("modal");
         const idList = document.getElementById("idList");
         const closeModal = document.getElementById("closeModal");
 
-        // Tárolt adatok inicializálása
-        let azonosito;
-        const storedAzonosito = localStorage.getItem("jegyAzonosito");
-        const storedVerified = localStorage.getItem("jegyVerified");
-        let allAzonositos = JSON.parse(localStorage.getItem("allAzonositos")) || [];
-
-        // Ha nincs azonosító, generáljunk egyet
-        if (storedAzonosito) {
-            azonosito = storedAzonosito;
-        } else {
-            azonosito = Math.floor(1000000 + Math.random() * 9000000);
-            localStorage.setItem("jegyAzonosito", azonosito);
-        }
-
-        // Megjelenítjük az azonosítót
-        azonositoElem.textContent = azonosito;
-
-        // Mentett azonosítók frissítése
-        if (!allAzonositos.includes(azonosito)) {
-            allAzonositos.push({ id: azonosito, verified: false });
-            localStorage.setItem("allAzonositos", JSON.stringify(allAzonositos));
-        }
-
-        // Ellenőrzés állapota
-        if (storedVerified === "true") {
-            verifiedText.style.display = "block";
-            couponCode.style.display = "block";
-            checkmark.style.display = "none";
-        }
-
-        // Hitelesítés kezelése
-        checkmark.addEventListener("click", function () {
-            if (storedVerified === "true") {
-                alert("A jegy nem érvényes, vagy már fel lett használva!");
-            } else {
-                localStorage.setItem("jegyVerified", "true");
-                verifiedText.style.display = "block";
-                couponCode.style.display = "block";
-                checkmark.style.display = "none";
-
-                // Az azonosító hitelesítettként jelölése
-                allAzonositos = allAzonositos.map(item => 
-                    item.id == azonosito ? { ...item, verified: true } : item
-                );
-                localStorage.setItem("allAzonositos", JSON.stringify(allAzonositos));
-            }
-        });
-
         // Fogaskerék eseménykezelés
         gear.addEventListener("click", function () {
-            idList.innerHTML = ""; // Ürítsük a listát
-            allAzonositos.forEach((item, index) => {
+            // Ürítsük ki a listát, majd egyedileg frissítsük
+            idList.innerHTML = "";
+            const uniqueAzonositos = [...new Set(allAzonositos.map(item => item.id))];
+            uniqueAzonositos.forEach((id, index) => {
                 const li = document.createElement("li");
-                li.textContent = `${index + 1}. ${item.id}`;
-                if (item.verified) {
+                li.textContent = `${index + 1}. ${id}`;
+                const azonositoObj = allAzonositos.find(item => item.id == id);
+                if (azonositoObj && azonositoObj.verified) {
                     const pipa = document.createElement("span");
                     pipa.textContent = " ✔";
                     pipa.classList.add("verified");
@@ -165,6 +110,11 @@
         closeModal.addEventListener("click", function () {
             modal.style.display = "none";
         });
+
+        // Az új azonosító elmentése, ha generáltunk
+        if (!storedAzonosito) {
+            localStorage.setItem("jegyAzonosito", azonosito);
+        }
     </script>
 </body>
 </html>
