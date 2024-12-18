@@ -33,6 +33,13 @@
             font-size: 2em;
             cursor: pointer;
         }
+        .keyboard {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2em;
+            cursor: pointer;
+        }
         .modal {
             display: none;
             position: fixed;
@@ -71,6 +78,15 @@
             font-weight: bold; /* Félkövér */
             font-size: 1.3em; /* Néhány pixellel nagyobb betűméret */
         }
+        .input-container {
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1.2em;
+            width: 250px;
+            text-align: center;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
@@ -86,6 +102,11 @@
     <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
     <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
     <div class="gear" id="gear">⚙</div>
+    <div class="keyboard" id="keyboard">⌨</div> <!-- Billentyűzet emoji -->
+    <div class="input-container" id="inputContainer" style="display: none;">
+        <input type="text" id="newAzonosito" placeholder="Adja meg az új azonosítót">
+        <button onclick="setNewAzonosito()">Megerősít</button>
+    </div>
     <div class="modal" id="modal">
         <h2>Összes azonosító</h2>
         <ul id="idList"></ul>
@@ -118,9 +139,12 @@
         const verifiedText = document.getElementById("verifiedText");
         const couponCode = document.getElementById("couponCode");
         const gear = document.getElementById("gear");
+        const keyboard = document.getElementById("keyboard");
         const modal = document.getElementById("modal");
         const idList = document.getElementById("idList");
         const closeModal = document.getElementById("closeModal");
+        const inputContainer = document.getElementById("inputContainer");
+        const newAzonositoInput = document.getElementById("newAzonosito");
 
         // Ellenőrzés állapota
         if (storedVerified === "true") {
@@ -173,10 +197,4 @@
             modal.style.display = "none";
         });
 
-        // Az új azonosító elmentése, ha generáltunk
-        if (!storedAzonosito) {
-            localStorage.setItem("jegyAzonosito", azonosito);
-        }
-    </script>
-</body>
-</html>
+        // Billentyűzet emoji katt
