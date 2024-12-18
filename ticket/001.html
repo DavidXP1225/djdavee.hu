@@ -85,11 +85,12 @@
         checkmark.addEventListener("click", function () {
             // Ellenőrizzük, hogy már hitelesítették-e a jegyet
             if (storedVerified === "true") {
-                // Ha már ellenőrizve lett, állítsuk a hátteret pirosra és jelenítsük meg a hibaüzenetet
+                // Ha már ellenőrizve lett, állítsuk a hátteret pirosra, jelenítsük meg a hibaüzenetet, és mutassuk az alert-et
                 document.body.style.backgroundColor = "#e74c3c"; // Piros háttér
                 errorText.style.display = "block"; // Hibaüzenet
                 verifiedText.style.display = "none"; // Elrejtjük a hitelesítést
                 couponCode.style.display = "none"; // Elrejtjük a kuponkódot
+                alert("A jegy nem érvényes, vagy már fel lett használva!"); // Felugró ablak
             } else {
                 // Ha még nem volt ellenőrizve, hitelesítsük
                 localStorage.setItem("jegyVerified", "true"); // Mentjük az ellenőrzött állapotot
