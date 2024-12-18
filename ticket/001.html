@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jegy Érvényes</title>
     <style>
+        /* Szép dizájn hozzáadása itt */
         body {
-            background-color: #2ecc71; /* Zöld háttér */
-            color: white; /* Fehér írás */
-            font-family: "Arial", sans-serif; /* Hivatalosnak tűnő betűtípus */
-            text-align: center; /* Szöveg középre igazítása */
+            background-color: #2ecc71;
+            color: white;
+            font-family: "Arial", sans-serif;
+            text-align: center;
             padding: 20px;
         }
         h1 {
@@ -24,19 +25,12 @@
             font-size: 3em;
             color: white;
             margin-top: 20px;
-            cursor: pointer; /* Mutatja, hogy kattintható */
+            cursor: pointer;
         }
         .gear {
             position: absolute;
             top: 10px;
             right: 10px;
-            font-size: 2em;
-            cursor: pointer;
-        }
-        .keyboard {
-            position: absolute;
-            top: 10px;
-            left: 10px;
             font-size: 2em;
             cursor: pointer;
         }
@@ -74,45 +68,27 @@
             border-radius: 4px;
         }
         .coupon {
-            color: yellow; /* Sárga szín */
-            font-weight: bold; /* Félkövér */
-            font-size: 1.3em; /* Néhány pixellel nagyobb betűméret */
-        }
-        .input-container {
-            margin-top: 20px;
-        }
-        input {
-            padding: 10px;
-            font-size: 1.2em;
-            width: 250px;
-            text-align: center;
+            color: yellow;
+            font-weight: bold;
+            font-size: 1.3em;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
     <h1>A jegy érvényes!</h1>
-    <p>5.000 Ft fizetve!</p>
-    <p>Érvényes: 2024. 12. 31. Thomas burger</p>
-    <p></p>
-    <p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik, ami miatt nem másolható!</p>
     <p>Azonosító: <span id="azonosito"></span></p>
-    <div id="qrcode" style="margin-top: 20px;"></div> <!-- QR kód ide kerül -->
+    <div id="qrcode" style="margin-top: 20px;"></div>
     <div class="checkmark" id="checkmark">✔</div>
     <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
     <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
     <div class="gear" id="gear">⚙</div>
-    <div class="keyboard" id="keyboard">⌨</div> <!-- Billentyűzet emoji -->
-    <div class="input-container" id="inputContainer" style="display: none;">
-        <input type="text" id="newAzonosito" placeholder="Adja meg az új azonosítót">
-        <button onclick="checkAzonosito()">Ellenőriz</button>
-    </div>
     <div class="modal" id="modal">
         <h2>Összes azonosító</h2>
         <ul id="idList"></ul>
         <button class="close" id="closeModal">Bezár</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <script>
         // Tárolt adatok inicializálása
         const storedAzonosito = localStorage.getItem("jegyAzonosito");
@@ -142,8 +118,6 @@
         const modal = document.getElementById("modal");
         const idList = document.getElementById("idList");
         const closeModal = document.getElementById("closeModal");
-        const inputContainer = document.getElementById("inputContainer");
-        const newAzonositoInput = document.getElementById("newAzonosito");
 
         // Ellenőrzés állapota
         if (storedVerified === "true") {
@@ -173,14 +147,31 @@
 
         // Fogaskerék eseménykezelés
         gear.addEventListener("click", function () {
-            // Ürítsük ki a listát, majd egyedileg frissítsük
+            // Frissítjük a listát a tárolt adatok alapján
             idList.innerHTML = "";
-            const uniqueAzonositos = [...new Set(allAzonositos.map(item => item.id))];
-            uniqueAzonositos.forEach((id, index) => {
+            allAzonositos.forEach((item, index) => {
                 const li = document.createElement("li");
-                li.textContent = `${index + 1}. ${id}`;
-                const azonositoObj = allAzonositos.find(item => item.id == id);
-                if (azonositoObj && azonositoObj.verified) {
+                li.textContent = `${index + 1}. ${item.id}`;
+                if (item.verified) {
                     const pipa = document.createElement("span");
                     pipa.textContent = " ✔";
-                    pipa.classList.add("verified
+                    pipa.classList.add("verified");
+                    li.appendChild(pipa);
+                }
+                idList.appendChild(li);
+            });
+            modal.style.display = "block"; // Modal megjelenítése
+        });
+
+        // Modal bezárása
+        closeModal.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        // Az új azonosító elmentése, ha generáltunk
+        if (!storedAzonosito) {
+            localStorage.setItem("jegyAzonosito", azonosito);
+        }
+    </script>
+</body>
+</html>
