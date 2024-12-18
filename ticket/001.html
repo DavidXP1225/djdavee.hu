@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jegy Érvényes</title>
+    <style>
+        body {
+            background-color: #2ecc71; /* Zöld háttér */
+            color: white; /* Fehér írás */
+            font-family: "Arial", sans-serif; /* Hivatalosnak tűnő betűtípus */
+            text-align: center; /* Szöveg középre igazítása */
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .checkmark {
+            font-size: 3em;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>A jegy érvényes!</h1>
@@ -12,6 +34,7 @@
     <p></p>
     <p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik, ami miatt nem másolható!</p>
     <p>Azonosító: <span id="azonosito"></span></p>
+    <div class="checkmark">✔</div>
 
     <script>
         // Generál egy 7 jegyű véletlenszámot
