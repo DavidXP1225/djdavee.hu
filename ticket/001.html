@@ -76,6 +76,9 @@
             font-weight: bold; /* Félkövér */
             font-size: 1.3em; /* Néhány pixellel nagyobb betűméret */
         }
+        #barcode {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -87,6 +90,7 @@
     <div class="checkmark" id="checkmark">✔</div>
     <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
     <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
+    <div id="barcode"></div> <!-- Vonalkód ide kerül -->
     <div class="gear" id="gear">⚙</div>
     <div class="modal" id="modal">
         <h2>Összes azonosító</h2>
@@ -95,6 +99,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode/dist/JsBarcode.all.min.js"></script> <!-- Vonalkód könyvtár -->
+
     <script>
         // Tárolt adatok inicializálása
         const storedAzonosito = localStorage.getItem("jegyAzonosito");
@@ -178,6 +184,14 @@
         if (!storedAzonosito) {
             localStorage.setItem("jegyAzonosito", azonosito);
         }
+
+        // Kuponkód vonalkód generálása
+        JsBarcode("#barcode", "NEWYEAR2000", {
+            format: "CODE128", // Vonalkód formátuma
+            displayValue: true, // Kuponkódot is mutatja a vonalkód alatt
+            fontSize: 18, // Felirat betűmérete
+            height: 40, // Vonalkód magassága
+        });
     </script>
 </body>
 </html>
