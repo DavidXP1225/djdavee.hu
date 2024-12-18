@@ -12,6 +12,20 @@
             text-align: center; /* Szöveg középre igazítása */
             padding: 20px;
         }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .checkmark {
+            font-size: 3em;
+            color: white;
+            margin-top: 20px;
+            cursor: pointer; /* Mutatja, hogy kattintható */
+        }
         .gear {
             position: absolute;
             top: 10px;
@@ -56,7 +70,14 @@
 </head>
 <body>
     <h1>A jegy érvényes!</h1>
+    <p>5.000 Ft fizetve!</p>
+    <p>Érvényes: 2024. 12. 31. Thomas burger</p>
+    <p></p>
+    <p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik, ami miatt nem másolható!</p>
     <p>Azonosító: <span id="azonosito"></span></p>
+    <div class="checkmark" id="checkmark">✔</div>
+    <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
+    <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
     <div class="gear" id="gear">⚙</div>
     <div class="modal" id="modal">
         <h2>Összes azonosító</h2>
@@ -80,11 +101,40 @@
         // Azonosító megjelenítése
         document.getElementById("azonosito").textContent = azonosito;
 
-        // Elemek
+        // Elemszelekciók
+        const checkmark = document.getElementById("checkmark");
+        const verifiedText = document.getElementById("verifiedText");
+        const couponCode = document.getElementById("couponCode");
         const gear = document.getElementById("gear");
         const modal = document.getElementById("modal");
         const idList = document.getElementById("idList");
         const closeModal = document.getElementById("closeModal");
+
+        // Ellenőrzés állapota
+        if (storedVerified === "true") {
+            verifiedText.style.display = "block";
+            couponCode.style.display = "block";
+            checkmark.style.display = "none";
+        }
+
+        // Hitelesítés kezelése
+        checkmark.addEventListener("click", function () {
+            if (storedVerified === "true") {
+                alert("A jegy nem érvényes, vagy már fel lett használva!");
+                document.body.style.backgroundColor = "#e74c3c"; // Háttér pirosra vált
+            } else {
+                localStorage.setItem("jegyVerified", "true");
+                verifiedText.style.display = "block";
+                couponCode.style.display = "block";
+                checkmark.style.display = "none";
+
+                // Az azonosító hitelesítettként jelölése
+                allAzonositos = allAzonositos.map(item =>
+                    item.id == azonosito ? { ...item, verified: true } : item
+                );
+                localStorage.setItem("allAzonositos", JSON.stringify(allAzonositos));
+            }
+        });
 
         // Fogaskerék eseménykezelés
         gear.addEventListener("click", function () {
