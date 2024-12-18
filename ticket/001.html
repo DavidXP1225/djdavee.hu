@@ -24,6 +24,13 @@
             font-size: 3em;
             color: white;
             margin-top: 20px;
+            cursor: pointer; /* Mutatja, hogy kattintható */
+        }
+        .verified {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: white;
         }
     </style>
 </head>
@@ -34,12 +41,24 @@
     <p></p>
     <p>FIGYELEM! Minden jegy egyedi azonosítóval rendelkezik, ami miatt nem másolható!</p>
     <p>Azonosító: <span id="azonosito"></span></p>
-    <div class="checkmark">✔</div>
+    <div class="checkmark" id="checkmark">✔</div>
+    <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
 
     <script>
         // Generál egy 7 jegyű véletlenszámot
         const randomAzonosito = Math.floor(1000000 + Math.random() * 9000000);
         document.getElementById("azonosito").textContent = randomAzonosito;
+
+        // Hozzáadjuk a kattintás eseményt a pipához
+        const checkmark = document.getElementById("checkmark");
+        const verifiedText = document.getElementById("verifiedText");
+
+        checkmark.addEventListener("click", function() {
+            // A pipa eltűnik
+            checkmark.style.display = "none";
+            // Megjelenik a "A jegy hitelesítve!" szöveg
+            verifiedText.style.display = "block";
+        });
     </script>
 </body>
 </html>
