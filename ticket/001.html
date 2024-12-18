@@ -32,6 +32,12 @@
             margin-top: 20px;
             color: white;
         }
+        .coupon {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #f1c40f; /* Arany szín a kiemeléshez */
+        }
     </style>
 </head>
 <body>
@@ -43,21 +49,25 @@
     <p>Azonosító: <span id="azonosito"></span></p>
     <div class="checkmark" id="checkmark">✔</div>
     <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
+    <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
 
     <script>
         // Generál egy 7 jegyű véletlenszámot
         const randomAzonosito = Math.floor(1000000 + Math.random() * 9000000);
         document.getElementById("azonosito").textContent = randomAzonosito;
 
-        // Hozzáadjuk a kattintás eseményt a pipához
+        // Pipa kattintási esemény
         const checkmark = document.getElementById("checkmark");
         const verifiedText = document.getElementById("verifiedText");
+        const couponCode = document.getElementById("couponCode");
 
         checkmark.addEventListener("click", function() {
             // A pipa eltűnik
             checkmark.style.display = "none";
             // Megjelenik a "A jegy hitelesítve!" szöveg
             verifiedText.style.display = "block";
+            // Megjelenik a kuponkód
+            couponCode.style.display = "block";
         });
     </script>
 </body>
