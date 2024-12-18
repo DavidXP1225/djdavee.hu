@@ -38,6 +38,12 @@
             margin-top: 10px;
             color: #f1c40f; /* Arany szín a kiemeléshez */
         }
+        .error {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -50,24 +56,49 @@
     <div class="checkmark" id="checkmark">✔</div>
     <p id="verifiedText" class="verified" style="display: none;">A jegy hitelesítve!</p>
     <p id="couponCode" class="coupon" style="display: none;">Kuponkód: NEWYEAR2000</p>
+    <p id="errorText" class="error" style="display: none;">A jegy már ellenőrizve lett!</p>
 
     <script>
-        // Generál egy 7 jegyű véletlenszámot
-        const randomAzonosito = Math.floor(1000000 + Math.random() * 9000000);
-        document.getElementById("azonosito").textContent = randomAzonosito;
+        // Ellenőrizzük, hogy van-e már azonosító a Local Storage-ban
+        const storedAzonosito = localStorage.getItem("jegyAzonosito");
+        const storedVerified = localStorage.getItem("jegyVerified"); // Ellenőrzés állapota
 
-        // Pipa kattintási esemény
+        // Ha nincs azonosító, generáljunk egyet és mentsük el
+        let azonosito;
+        if (storedAzonosito) {
+            azonosito = storedAzonosito;
+        } else {
+            azonosito = Math.floor(1000000 + Math.random() * 9000000); // Új azonosító
+            localStorage.setItem("jegyAzonosito", azonosito);
+        }
+
+        // Megjelenítjük az azonosítót az oldalon
+        document.getElementById("azonosito").textContent = azonosito;
+
+        // Elemek kiválasztása
         const checkmark = document.getElementById("checkmark");
         const verifiedText = document.getElementById("verifiedText");
         const couponCode = document.getElementById("couponCode");
+        const errorText = document.getElementById("errorText");
 
-        checkmark.addEventListener("click", function() {
-            // A pipa eltűnik
-            checkmark.style.display = "none";
-            // Megjelenik a "A jegy hitelesítve!" szöveg
-            verifiedText.style.display = "block";
-            // Megjelenik a kuponkód
-            couponCode.style.display = "block";
+        // Kattintási esemény a pipára
+        checkmark.addEventListener("click", function () {
+            // Ellenőrizzük, hogy már hitelesítették-e a jegyet
+            if (storedVerified === "true") {
+                // Ha már ellenőrizve lett, állítsuk a hátteret pirosra és jelenítsük meg a hibaüzenetet
+                document.body.style.backgroundColor = "#e74c3c"; // Piros háttér
+                errorText.style.display = "block"; // Hibaüzenet
+                verifiedText.style.display = "none"; // Elrejtjük a hitelesítést
+                couponCode.style.display = "none"; // Elrejtjük a kuponkódot
+            } else {
+                // Ha még nem volt ellenőrizve, hitelesítsük
+                localStorage.setItem("jegyVerified", "true"); // Mentjük az ellenőrzött állapotot
+                checkmark.style.display = "none"; // Pipa eltűnik
+                verifiedText.style.display = "block"; // Hitelesítési szöveg
+                couponCode.style.display = "block"; // Kuponkód
+                errorText.style.display = "none"; // Elrejtjük a hibaüzenetet
+                document.body.style.backgroundColor = "#2ecc71"; // Visszaállítjuk a zöld hátteret
+            }
         });
     </script>
 </body>
