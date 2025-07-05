@@ -6,36 +6,19 @@
   <title>Petrához visszaszámlálás 💘</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       font-family: 'Dancing Script', cursive;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
       text-align: center;
       padding: 20px;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      margin-top: 20px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-    }
+    h1 { font-size: 2.5rem; margin: 20px 0 10px; }
+    h2 { font-size: 1.5rem; margin-bottom: 30px; }
 
     #countdown {
       font-size: 2rem;
@@ -44,20 +27,26 @@
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
       max-width: 90vw;
-      word-wrap: break-word;
+      margin: 0 auto;
     }
 
-    .heart {
+    .floating, .petal {
       position: absolute;
       width: 20px;
       height: 20px;
-      background: red;
-      transform: rotate(-45deg);
-      animation: float 5s linear infinite;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 6s linear infinite;
+      z-index: 999;
     }
 
-    .heart::before,
-    .heart::after {
+    .floating {
+      background: red;
+      transform: rotate(-45deg);
+    }
+
+    .floating::before,
+    .floating::after {
       content: '';
       position: absolute;
       width: 20px;
@@ -66,30 +55,16 @@
       border-radius: 50%;
     }
 
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
+    .floating::before { top: -10px; left: 0; }
+    .floating::after { top: 0; left: 10px; }
 
-    .heart::after {
-      left: 10px;
-      top: 0;
-    }
+    .petal { background-color: white; }
+    .petal.red { background-color: red; }
 
     @keyframes float {
-      0% {
-        bottom: -50px;
-        opacity: 0;
-        transform: translateX(0) rotate(-45deg);
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        bottom: 110%;
-        opacity: 0;
-        transform: translateX(100px) rotate(-45deg);
-      }
+      0% { bottom: -50px; opacity: 0; transform: translateX(0) rotate(0deg); }
+      50% { opacity: 1; }
+      100% { bottom: 110%; opacity: 0; transform: translateX(100px) rotate(360deg); }
     }
 
     .beat {
@@ -98,22 +73,10 @@
     }
 
     @keyframes heartbeat {
-      0% {
-        transform: scale(1);
-        color: #ff4d6d;
-      }
-      25% {
-        transform: scale(1.3);
-        color: #ff0033;
-      }
-      50% {
-        transform: scale(1);
-        color: #ff4d6d;
-      }
-      100% {
-        transform: scale(1.3);
-        color: #ff0033;
-      }
+      0% { transform: scale(1); color: #ff4d6d; }
+      25% { transform: scale(1.3); color: #ff0033; }
+      50% { transform: scale(1); color: #ff4d6d; }
+      100% { transform: scale(1.3); color: #ff0033; }
     }
 
     #love-img {
@@ -124,23 +87,19 @@
       border: 5px solid white;
     }
 
+    canvas#fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
     @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      h2 {
-        font-size: 1.2rem;
-      }
-
-      #countdown {
-        font-size: 1.3rem;
-        padding: 15px;
-      }
-
-      .beat {
-        font-size: 3rem;
-      }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.2rem; }
+      #countdown { font-size: 1.3rem; padding: 15px; }
+      .beat { font-size: 3rem; }
     }
   </style>
 </head>
@@ -151,16 +110,31 @@
   <div id="countdown">Számolunk vissza, tesó... 😍</div>
   <div id="heart" style="margin-top: 30px;"></div>
 
-  <!-- 🔥 Itt a közös képetek -->
   <img
     id="love-img"
-    src="https://kepkuldes.com/images/e75d7e69ccd9d0e68738851685d1117d.jpg" 
+    src="https://kepkuldes.com/images/e75d7e69ccd9d0e68738851685d1117d.jpg"
     alt="Dávid & Petra 💑"
   />
+
+  <!-- 🎆 Tűzijáték vászon -->
+  <canvas id="fireworks"></canvas>
 
   <script>
     const countdown = document.getElementById('countdown');
     const heart = document.getElementById('heart');
+    const fireworksCanvas = document.getElementById('fireworks');
+    const ctx = fireworksCanvas.getContext('2d');
+    let fireworks = [];
+    let animationActive = false;
+
+    function resizeCanvas() {
+      fireworksCanvas.width = window.innerWidth;
+      fireworksCanvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
     const targetDate = new Date('2025-07-05T20:00:00+02:00').getTime();
 
     function updateCountdown() {
@@ -168,35 +142,95 @@
       const distance = targetDate - now;
 
       if (distance <= 0) {
+        if (!animationActive) startFireworks();
         countdown.innerHTML = "🥰 Itt az idő! Öleld meg Petrát most rögtön!";
         heart.innerHTML = "❤️";
         heart.classList.add("beat");
         return;
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      const milliseconds = Math.floor((distance % 1000) / 10);
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+      const ms = Math.floor((distance % 1000) / 10);
 
-      countdown.innerHTML = `${days} nap, ${hours} óra, ${minutes} perc, ${seconds} mp, ${milliseconds < 10 ? '0' + milliseconds : milliseconds} századmásodperc 💓`;
+      countdown.innerHTML = `${d} nap, ${h} óra, ${m} perc, ${s} mp, ${ms < 10 ? '0'+ms : ms} századmásodperc 💓`;
     }
 
     setInterval(updateCountdown, 50);
     updateCountdown();
 
+    // 💗 Szívek + Szirmok
     setInterval(() => {
-      const heartElem = document.createElement('div');
-      heartElem.className = 'heart';
-      heartElem.style.left = Math.random() * 100 + 'vw';
-      heartElem.style.animationDuration = (Math.random() * 3 + 2) + 's';
-      document.body.appendChild(heartElem);
+      const type = Math.random() < 0.7 ? 'heart' : 'petal';
+      const elem = document.createElement('div');
+      if (type === 'heart') {
+        elem.className = 'floating';
+      } else {
+        elem.className = 'petal';
+        if (Math.random() > 0.5) elem.classList.add('red');
+      }
+      elem.style.left = Math.random() * 100 + 'vw';
+      elem.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(elem);
 
-      setTimeout(() => {
-        heartElem.remove();
-      }, 5000);
-    }, 300);
+      setTimeout(() => elem.remove(), 6000);
+    }, 400);
+
+    // 🎆 Tűzijáték logika
+    function startFireworks() {
+      animationActive = true;
+
+      class Particle {
+        constructor(x, y, color) {
+          this.x = x;
+          this.y = y;
+          this.color = color;
+          this.radius = Math.random() * 2 + 1;
+          this.speed = Math.random() * 5 + 2;
+          this.angle = Math.random() * 2 * Math.PI;
+          this.alpha = 1;
+        }
+
+        update() {
+          this.x += Math.cos(this.angle) * this.speed;
+          this.y += Math.sin(this.angle) * this.speed;
+          this.alpha -= 0.01;
+        }
+
+        draw() {
+          ctx.globalAlpha = this.alpha;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+      }
+
+      function createFirework() {
+        const x = Math.random() * fireworksCanvas.width;
+        const y = Math.random() * fireworksCanvas.height / 2;
+        const colors = ['#ff0000', '#ffff66', '#ffffff', '#ff66cc', '#66ffcc'];
+        for (let i = 0; i < 100; i++) {
+          fireworks.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+        fireworks.forEach((p, index) => {
+          p.update();
+          p.draw();
+          if (p.alpha <= 0) fireworks.splice(index, 1);
+        });
+        requestAnimationFrame(animate);
+      }
+
+      setInterval(createFirework, 800);
+      animate();
+    }
   </script>
 </body>
 </html>
