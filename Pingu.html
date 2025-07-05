@@ -16,10 +16,8 @@
       overflow-x: hidden;
       min-height: 100vh;
     }
-
     h1 { font-size: 2.5rem; margin: 20px 0 10px; }
     h2 { font-size: 1.5rem; margin-bottom: 30px; }
-
     #countdown {
       font-size: 2rem;
       background-color: rgba(255, 255, 255, 0.2);
@@ -29,7 +27,6 @@
       max-width: 90vw;
       margin: 0 auto;
     }
-
     .floating, .petal {
       position: absolute;
       width: 20px;
@@ -39,12 +36,10 @@
       animation: float 6s linear infinite;
       z-index: 999;
     }
-
     .floating {
       background: red;
       transform: rotate(-45deg);
     }
-
     .floating::before,
     .floating::after {
       content: '';
@@ -54,7 +49,6 @@
       background: red;
       border-radius: 50%;
     }
-
     .floating::before { top: -10px; left: 0; }
     .floating::after { top: 0; left: 10px; }
 
@@ -95,6 +89,19 @@
       pointer-events: none;
     }
 
+    button {
+      margin-top: 40px;
+      font-size: 2rem;
+      padding: 10px 30px;
+      border-radius: 15px;
+      border: none;
+      background-color: #ff4d6d;
+      color: white;
+      font-family: 'Dancing Script', cursive;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 2rem; }
       h2 { font-size: 1.2rem; }
@@ -116,6 +123,9 @@
     alt="Dávid & Petra 💑"
   />
 
+  <!-- 💖 Gomb -->
+  <button onclick="manualTrigger()">💖</button>
+
   <!-- 🎆 Tűzijáték vászon -->
   <canvas id="fireworks"></canvas>
 
@@ -131,7 +141,6 @@
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
     }
-
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
@@ -143,7 +152,7 @@
 
       if (distance <= 0) {
         if (!animationActive) startFireworks();
-        countdown.innerHTML = "🥰 Itt az idő! Öleld meg Petrát most rögtön!";
+        countdown.innerHTML = "💖 Itt az idő! Petra már csak egy ölelésre van tőled!";
         heart.innerHTML = "❤️";
         heart.classList.add("beat");
         return;
@@ -174,7 +183,6 @@
       elem.style.left = Math.random() * 100 + 'vw';
       elem.style.animationDuration = (Math.random() * 3 + 3) + 's';
       document.body.appendChild(elem);
-
       setTimeout(() => elem.remove(), 6000);
     }, 400);
 
@@ -230,6 +238,14 @@
 
       setInterval(createFirework, 800);
       animate();
+    }
+
+    // 💖 Manuális trigger
+    function manualTrigger() {
+      countdown.innerHTML = "💖 Itt az idő! Petra már csak egy ölelésre van tőled!";
+      heart.innerHTML = "❤️";
+      heart.classList.add("beat");
+      if (!animationActive) startFireworks();
     }
   </script>
 </body>
