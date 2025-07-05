@@ -19,16 +19,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
       text-align: center;
       padding: 20px;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     h1 {
       font-size: 2.5rem;
       margin-bottom: 10px;
+      margin-top: 20px;
     }
 
     h2 {
@@ -42,7 +43,6 @@
       padding: 20px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-      transition: all 0.3s ease;
       max-width: 90vw;
       word-wrap: break-word;
     }
@@ -116,6 +116,14 @@
       }
     }
 
+    #love-img {
+      margin-top: 40px;
+      max-width: 90vw;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(255, 0, 90, 0.3);
+      border: 5px solid white;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 2rem;
@@ -139,8 +147,16 @@
 <body>
   <h1>⏳ Visszaszámlálás Petrához 💖</h1>
   <h2>2025. július 5. 20:00 (Magyar idő szerint)</h2>
+
   <div id="countdown">Számolunk vissza, tesó... 😍</div>
   <div id="heart" style="margin-top: 30px;"></div>
+
+  <!-- 🔥 Itt a közös képetek -->
+  <img
+    id="love-img"
+    src="https://kepkuldes.com/images/e75d7e69ccd9d0e68738851685d1117d.jpg" 
+    alt="Dávid & Petra 💑"
+  />
 
   <script>
     const countdown = document.getElementById('countdown');
@@ -162,7 +178,7 @@
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      const milliseconds = Math.floor((distance % 1000) / 10); // századmásodperc
+      const milliseconds = Math.floor((distance % 1000) / 10);
 
       countdown.innerHTML = `${days} nap, ${hours} óra, ${minutes} perc, ${seconds} mp, ${milliseconds < 10 ? '0' + milliseconds : milliseconds} századmásodperc 💓`;
     }
@@ -170,7 +186,6 @@
     setInterval(updateCountdown, 50);
     updateCountdown();
 
-    // Szívecskék repkedése
     setInterval(() => {
       const heartElem = document.createElement('div');
       heartElem.className = 'heart';
