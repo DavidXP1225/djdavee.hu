@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visszaszámlálás Petrához 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Dancing Script', cursive;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    #countdown {
+      font-size: 2.5rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 20px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(-45deg);
+      animation: float 5s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -50px;
+        opacity: 0;
+        transform: translateX(0) rotate(-45deg);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 110%;
+        opacity: 0;
+        transform: translateX(100px) rotate(-45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>⏳ Visszaszámlálás a találkozásig Petrával 💖</h1>
+  <h2>2025. július 5. 20:00 (Magyar idő szerint)</h2>
+  <div id="countdown">Számolunk vissza, tesó... 😍</div>
+
+  <script>
+    const countdown = document.getElementById('countdown');
+    const targetDate = new Date('2025-07-05T20:00:00+02:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdown.innerHTML = "🥰 Itt az idő! Öleld meg Petrát most rögtön!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `${days} nap, ${hours} óra, ${minutes} perc, ${seconds} másodperc 💓`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Szívecske animáció generálása
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }, 300);
+  </script>
+</body>
+</html>
