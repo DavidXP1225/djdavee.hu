@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visszaszámlálás Petrához 💕</title>
+  <title>Petrához visszaszámlálás 💘</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    body {
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       font-family: 'Dancing Script', cursive;
       color: #fff;
@@ -16,27 +20,31 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
       text-align: center;
+      padding: 20px;
+      overflow: hidden;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 2rem;
+      font-size: 1.5rem;
       margin-bottom: 30px;
     }
 
     #countdown {
-      font-size: 2.5rem;
+      font-size: 2rem;
       background-color: rgba(255, 255, 255, 0.2);
-      padding: 20px 40px;
+      padding: 20px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+      max-width: 90vw;
+      word-wrap: break-word;
     }
 
     .heart {
@@ -83,23 +91,70 @@
         transform: translateX(100px) rotate(-45deg);
       }
     }
+
+    .beat {
+      font-size: 4rem;
+      animation: heartbeat 1s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+        color: #ff4d6d;
+      }
+      25% {
+        transform: scale(1.3);
+        color: #ff0033;
+      }
+      50% {
+        transform: scale(1);
+        color: #ff4d6d;
+      }
+      100% {
+        transform: scale(1.3);
+        color: #ff0033;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      #countdown {
+        font-size: 1.3rem;
+        padding: 15px;
+      }
+
+      .beat {
+        font-size: 3rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>⏳ Visszaszámlálás a találkozásig Petrával 💖</h1>
+  <h1>⏳ Visszaszámlálás Petrához 💖</h1>
   <h2>2025. július 5. 20:00 (Magyar idő szerint)</h2>
   <div id="countdown">Számolunk vissza, tesó... 😍</div>
+  <div id="heart" style="margin-top: 30px;"></div>
 
   <script>
     const countdown = document.getElementById('countdown');
+    const heart = document.getElementById('heart');
     const targetDate = new Date('2025-07-05T20:00:00+02:00').getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = targetDate - now;
 
-      if (distance < 0) {
+      if (distance <= 0) {
         countdown.innerHTML = "🥰 Itt az idő! Öleld meg Petrát most rögtön!";
+        heart.innerHTML = "❤️";
+        heart.classList.add("beat");
         return;
       }
 
@@ -107,23 +162,24 @@
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const milliseconds = Math.floor((distance % 1000) / 10); // századmásodperc
 
-      countdown.innerHTML = `${days} nap, ${hours} óra, ${minutes} perc, ${seconds} másodperc 💓`;
+      countdown.innerHTML = `${days} nap, ${hours} óra, ${minutes} perc, ${seconds} mp, ${milliseconds < 10 ? '0' + milliseconds : milliseconds} századmásodperc 💓`;
     }
 
-    setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 50);
     updateCountdown();
 
-    // Szívecske animáció generálása
+    // Szívecskék repkedése
     setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-      document.body.appendChild(heart);
+      const heartElem = document.createElement('div');
+      heartElem.className = 'heart';
+      heartElem.style.left = Math.random() * 100 + 'vw';
+      heartElem.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(heartElem);
 
       setTimeout(() => {
-        heart.remove();
+        heartElem.remove();
       }, 5000);
     }, 300);
   </script>
